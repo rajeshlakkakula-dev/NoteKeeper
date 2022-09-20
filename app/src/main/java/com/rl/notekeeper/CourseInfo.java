@@ -8,6 +8,23 @@ import java.util.List;
 public class CourseInfo implements Parcelable {
 
 
+    public String getmCourseId() {
+        return mCourseId;
+    }
+
+    public String getmTitle() {
+        return mTitle;
+    }
+
+    public ModuleInfo getModules(String moduleId) {
+
+        for (ModuleInfo moduleInfo : mModules) {
+            if (moduleId.equals(moduleInfo.getmModuleId()))
+                return moduleInfo;
+        }
+        return null;
+    }
+
     private final String mCourseId;
     private final String mTitle;
     private final List<ModuleInfo> mModules;
