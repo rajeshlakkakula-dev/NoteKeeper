@@ -4,6 +4,7 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.List;
+import java.util.Objects;
 
 public class CourseInfo implements Parcelable {
 
@@ -35,6 +36,24 @@ public class CourseInfo implements Parcelable {
         this.mModules = mModules;
     }
 
+
+    @Override
+    public String toString() {
+        return mTitle;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        CourseInfo that = (CourseInfo) o;
+        return Objects.equals(mCourseId, that.mCourseId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(mCourseId);
+    }
 
     protected CourseInfo(Parcel in) {
         mCourseId = in.readString();

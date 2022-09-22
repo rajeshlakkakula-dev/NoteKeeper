@@ -20,9 +20,15 @@ import com.rl.notekeeper.databinding.ActivityMainBinding;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    private ArrayAdapter<NoteInfo> arrayAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +47,34 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(new Intent(MainActivity.this, NoteActivity.class));
             }
         });
+
+        initializeDisplayContent();
+
+    }
+
+    private void initializeDisplayContent() {
+
+
+        final ListView listView = findViewById(R.id.list_notes);
+
+        List<NoteInfo> noteInfos = DataManager.getInstance().getmNotes();
+
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, noteInfos);
+
+        listView.setAdapter(arrayAdapter);
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+                startActivity(intent);
+
+
+            }
+        });
+
+
     }
 
 }

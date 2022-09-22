@@ -20,11 +20,22 @@ public class DataManager {
             myInstance = new DataManager();
             myInstance.initializeCourses();
             myInstance.initializeNotes();
+            myInstance.initialExampleNotes();
 
         }
 
 
         return myInstance;
+    }
+
+
+    public List<NoteInfo> getmNotes() {
+        return mNotes;
+    }
+
+
+    public List<CourseInfo> getmCourses(){
+        return  mCourses;
     }
 
 
@@ -50,6 +61,22 @@ public class DataManager {
         mCourses.add(initCourse2());
         mCourses.add(initCourse3());
         mCourses.add(initCourse4());
+
+    }
+
+
+    public void initialExampleNotes() {
+
+        final DataManager dm = getInstance();
+
+
+        CourseInfo courseInfo = dm.getCourses("android_intents");
+
+        courseInfo.getModules("android_intents_m01").setmIsComplete(true);
+        courseInfo.getModules("android_intents_m02").setmIsComplete(true);
+        courseInfo.getModules("android_intents_m03").setmIsComplete(true);
+        mNotes.add(new NoteInfo(courseInfo, "Intent dynamic", "Intents are really good components"));
+
 
     }
 

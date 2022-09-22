@@ -3,6 +3,8 @@ package com.rl.notekeeper;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.Objects;
+
 public class NoteInfo implements Parcelable {
 
     private CourseInfo mCourse;
@@ -37,6 +39,32 @@ public class NoteInfo implements Parcelable {
 
     public void setmText(String mText) {
         this.mText = mText;
+    }
+
+    private String getCompareKey() {
+
+        return mCourse.getmCourseId() + " | " + mTitle + " | " + mText;
+
+
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        NoteInfo noteInfo = (NoteInfo) o;
+        return getCompareKey().equals(noteInfo.getCompareKey());
+    }
+
+    @Override
+    public int hashCode() {
+        return getCompareKey().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return getCompareKey();
     }
 
     protected NoteInfo(Parcel in) {
